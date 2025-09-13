@@ -1,18 +1,23 @@
-SELECT p.property_id, p.name
-FROM properties p
+
+SELECT p.id,
+       p.name,
+       p.location
+FROM Properties p
 WHERE (
     SELECT AVG(r.rating)
-    FROM reviews r
-    WHERE r.property_id = p.property_id
-) > 4.0;
+    FROM Reviews r
+    WHERE r.property_id = p.id
+) > 4.0
+ORDER BY p.id;
 
 
-
-SELECT u.user_id, u.name
-FROM users u
+SELECT u.id,
+       u.name,
+       u.email
+FROM Users u
 WHERE (
     SELECT COUNT(*)
-    FROM bookings b
-    WHERE b.user_id = u.user_id
-) > 3;
-
+    FROM Bookings b
+    WHERE b.user_id = u.id
+) > 3
+ORDER BY u.id;
